@@ -13,4 +13,11 @@
         android:text="TextView"
         tools:layout_editor_absoluteX="160dp"
         tools:layout_editor_absoluteY="100dp" />
+
+    <WebView
+        android:id="@+id/webview3"
+        android:layout_width="393dp"
+        android:layout_height="371dp"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="180dp" />
 </android.support.constraint.ConstraintLayout>
