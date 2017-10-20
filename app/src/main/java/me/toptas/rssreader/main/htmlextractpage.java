@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 
 import me.toptas.rssreader.R;
+import android.webkit.WebView;
 
 public class htmlextractpage extends AppCompatActivity {
     static String jim;
@@ -36,14 +37,29 @@ public class htmlextractpage extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
+                //start content parse
                 Document doc = Jsoup.connect(jim).get();
 
                 Elements elementsHtml = doc.getElementsByAttributeValue("class", "app");
 
-                for (Element element : elementsHtml){
+                for (Element element : elementsHtml) {
                     Log.i("PARSED ELEMENTS:", URLDecoder.decode(element.text(), HTTP.UTF_8));
-                   parsed=URLDecoder.decode(element.text(), HTTP.UTF_8);
+                    parsed = URLDecoder.decode(element.text(), HTTP.UTF_8);
 
+                    }
+                //end content parse
+
+                    //start link extract
+                Elements links = doc.getElementsByAttributeValue("id", "applink");
+                for (Element link : links) {
+
+                    // get the value from href attribute
+                    System.out.println("\nlink : " + link.attr("href"));
+                    System.out.println("text : " + link.text());
+                     String applylink=link.attr("href");
+                    String applylinktext=link.text();
+
+                    //end link extratc
 
                 }
             } catch (IOException e) {
@@ -57,7 +73,27 @@ public class htmlextractpage extends AppCompatActivity {
         protected void onPostExecute(Void aVoid){
             super.onPostExecute(aVoid);
             outputTextView.setText(parsed);
+
+//webview starts
+            WebView wv = (WebView) findViewById(R.id.webview3);
+
+            final String mimeType = "text/html";
+            final String encoding = "UTF-8";
+            String html = parsed;
+
+
+            wv.loadDataWithBaseURL("", html, mimeType, encoding, "");
+            //webview ends
+
         }
+
+
+
+
+
+
+
+
     }
 
 
