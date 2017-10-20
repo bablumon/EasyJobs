@@ -74,16 +74,6 @@ public class htmlextractpage extends AppCompatActivity {
             super.onPostExecute(aVoid);
             outputTextView.setText(parsed);
 
-//webview starts
-            WebView wv = (WebView) findViewById(R.id.webview3);
-
-            final String mimeType = "text/html";
-            final String encoding = "UTF-8";
-            String html = parsed;
-
-
-            wv.loadDataWithBaseURL("", html, mimeType, encoding, "");
-            //webview ends
 
         }
 
